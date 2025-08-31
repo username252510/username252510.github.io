@@ -21,24 +21,20 @@
             background: #444;
             margin: 40px 0;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-        th, td {
-            border: 1px solid #888;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #222;
-        }
         img {
-            max-width: 100%;
+            max-width: 400px; /* default size for bigger screens */
+            width: 100%;
             height: auto;
             margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto; /* centers the image */
+        }
+        /* makes image scale on small screens */
+        @media (max-width: 500px) {
+            img {
+                max-width: 90%;
+            }
         }
     </style>
 </head>
@@ -49,7 +45,7 @@
     <img src="https://dlcdnwebimgs.asus.com/files/media/cc741768-0a36-45c6-b0df-4fb5bd7a8552/v1/assets/image/proart/article_cover.jpg" alt="Aesthetic Laptop">
 
     <h2>Introduction</h2>
-    <p>This website explains why I think that I should get a new laptop, and not just because I want something new, but because I actually need something reliable that can keep up with school and everyday life. The laptop I use now is reaching its limits. It’s slow, heavy, and doesn’t handle schoolwork very well anymore. I've done my research, and coded this website myself in HTML so please let me know if anything looks off.</p>
+    <p>This is a short website that explains why I think that I should get a new laptop, and not just because I want something new, but because I actually need something reliable that can keep up with school and everyday life. The laptop I use now is reaching its limits. It’s slow, heavy, and doesn’t handle schoolwork very well anymore. I've done my research, and coded this website myself in HTML so please just take a minute to read it and consider it.</p>
 
     <h2>Why I Need a New Laptop</h2>
     <p>I use my laptop for school every day, not just for Google Drive or searching, but also for using more advanced software when needed, which my laptop often struggles to run. Although my current laptop might have been a quick and easy fix when you found out I needed one for school, it is starting to become obsolete.</p>
@@ -67,71 +63,7 @@
     <h2>Slow and Underpowered</h2>
     <p>My current laptop lags when I have too many tabs open, and it struggles when using software like Adobe Illustrator, and one software (Autodesk Fusion) even said that my computer doesn't meet the recommended system requirements, so it doesn't run that well. A more up to date laptop with a more powerful processor and SSD would allow me to use software like this way more easily without the lag.</p>
 
-    <h2>Heavy and Bulky</h2>
-    <p>My laptop is also pretty heavy, especially when I have to carry it around all day with other materials. Many of the other laptops I looked at are a lot lighter, without giving up any of the important specs. This would make a big difference in my daily life.</p>
-
     <hr>
-
-    <h1>Laptops I Researched</h1>
-
-    <p>Instead of just asking for a random laptop, I looked into different models, compared specs, and thought about what actually matters for how I use it. I’ve focused on portability, reliability, battery life, and value, not just fancy features.</p>
-
-    <p>Here’s what I specifically looked for:</p>
-    <ul>
-        <li>Portable: easy to carry in my backpack</li>
-        <li>Decent battery: enough to get through school</li>
-        <li>Fast processor and SSD: so I don’t have to wait for things to load</li>
-        <li>Clear and high quality screen: easy on the eyes for reading & writing</li>
-        <li>Build quality: something that is built well</li>
-        <li>Fair price: close to what Spencer’s laptop cost</li>
-    </ul>
-
-    <h3>Options I Mainly Looked At:</h3>
-
-    <table>
-        <tr>
-            <th>Laptop</th>
-            <th>Weight</th>
-            <th>Screen</th>
-            <th>Battery</th>
-            <th>Price (CAD)</th>
-            <th>Why It's Great</th>
-        </tr>
-        <tr>
-            <td>ASUS Vivobook Pro 15 OLED</td>
-            <td>~4.0 lbs</td>
-            <td>15.6″ OLED (3K)</td>
-            <td>Good</td>
-            <td>~$1,400</td>
-            <td>Great balance of power and portability, nice screen</td>
-        </tr>
-        <tr>
-            <td>ASUS Zephyrus G14</td>
-            <td>~3.5 lbs</td>
-            <td>14″ QHD 165Hz</td>
-            <td>Good</td>
-            <td>~$1,300</td>
-            <td>Very light, premium feel, excellent multitasker</td>
-        </tr>
-        <tr>
-            <td>Vivobook S15 Copilot+</td>
-            <td>~3.1 lbs</td>
-            <td>15.6″ 3K OLED</td>
-            <td>Excellent</td>
-            <td>~$1,360</td>
-            <td>Sleek, super light, amazing battery life</td>
-        </tr>
-        <tr>
-            <td>ASUS TUF A15</td>
-            <td>~4.85 lbs</td>
-            <td>15.6″ 144Hz</td>
-            <td>Decent</td>
-            <td>~$1,100</td>
-            <td>Best budget option with strong specs, a bit heavier</td>
-        </tr>
-    </table>
-
-    <p>These are all amazing laptops that would be great for school and gaming. They all have good specs, good battery life, and are portable. Any of them would be a great pick for a well balanced laptop.</p>
 
     <h1>Responding to Concerns</h1>
 
