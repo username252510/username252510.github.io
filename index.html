@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connor's Links</title>
   <style>
-    /* 🌑 Dark background with cool animated gradient */
+    /* 🌑 Darker black background with slow gradient effect */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #2b2b2b, #0f0f0f);
+      background: linear-gradient(-45deg, #000000, #0a0a0a, #000000, #111111);
       background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
+      animation: gradientMove 15s ease infinite;
       color: white;
       text-align: center;
     }
@@ -21,33 +21,49 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ✨ Glowing text effect */
+    /* 🌈 Rainbow text animation */
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin: 20px 0;
-      text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff, 0 0 30px #00f7ff;
+      background: linear-gradient(
+        to right,
+        red, orange, yellow, green, cyan, blue, violet, red
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400% 100%;
+      animation: rainbowText 6s linear infinite;
+    }
+    @keyframes rainbowText {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     /* 📱 Phone container */
     .phone {
+      position: relative;
       max-width: 400px;
       margin: 0 auto;
-      padding: 20px;
     }
 
+    /* phone frame image */
     .phone img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 25px;
     }
 
-    /* 🖼️ App grid */
+    /* 🖼️ Apps inside phone */
     .apps {
+      position: absolute;
+      top: 18%;   /* adjust this to fit into your phone screen area */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%; /* how wide apps fit into screen */
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 40px 0; /* space for "widget" at top */
+      gap: 18px;
+      padding-top: 40px; /* space for widget */
     }
 
     .app {
@@ -57,9 +73,9 @@
     }
 
     .app img {
-      width: 70px;   /* set equal size for all */
-      height: 70px;  /* force square size */
-      object-fit: cover; /* crops to fit nicely */
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       transition: transform 0.2s ease;
@@ -70,15 +86,15 @@
     }
 
     .app span {
-      margin-top: 5px;
-      font-size: 0.9rem;
+      margin-top: 4px;
+      font-size: 0.75rem;
     }
 
     /* 📱 Responsive */
     @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      .app img { width: 60px; height: 60px; }
-      .apps { gap: 15px; }
+      h1 { font-size: 2.2rem; }
+      .app img { width: 50px; height: 50px; }
+      .apps { gap: 14px; }
     }
   </style>
 </head>
@@ -87,44 +103,36 @@
   <!-- ✨ Title -->
   <h1>Connor's Links</h1>
 
+  <!-- 📱 Phone w/ apps on top -->
   <div class="phone">
-    <!-- 📱 Phone frame image (optional, if you want background phone look) -->
     <img src="images/iphoneforwebsite.png" alt="Phone Frame">
 
-    <!-- 📱 App grid -->
     <div class="apps">
-      
-      <!-- 👇 Each app icon (replace # with your links) -->
+      <!-- 👇 Each app icon (replace # with links) -->
       <div class="app">
         <a href="#"><img src="images/snapchat.png" alt="Snapchat"></a>
         <span>Snapchat</span>
       </div>
-
       <div class="app">
         <a href="#"><img src="images/tiktok.png" alt="TikTok"></a>
         <span>TikTok</span>
       </div>
-
       <div class="app">
         <a href="#"><img src="images/roblox.png" alt="Roblox"></a>
         <span>Roblox</span>
       </div>
-
       <div class="app">
         <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
         <span>Instagram</span>
       </div>
-
       <div class="app">
         <a href="#"><img src="images/discord.png" alt="Discord"></a>
         <span>Discord</span>
       </div>
-
       <div class="app">
         <a href="#"><img src="images/airbuds.png" alt="Airbuds"></a>
         <span>Airbuds</span>
       </div>
-
     </div>
   </div>
 
