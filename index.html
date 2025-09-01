@@ -5,25 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connor's Links</title>
   <style>
-    /* 🌑 Darker black background with slow gradient effect */
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #000000, #0a0a0a, #000000, #111111);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
+      overflow: hidden;
+      font-family: 'Trebuchet MS', sans-serif; /* rounded style */
+      background: #000; /* OLED black */
       color: white;
       text-align: center;
     }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
 
-    /* 🌈 Rainbow text animation */
+    /* 🌈 Rainbow w/ white stroke */
     h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin: 20px 0;
       background: linear-gradient(
         to right,
@@ -33,37 +26,39 @@
       -webkit-text-fill-color: transparent;
       background-size: 400% 100%;
       animation: rainbowText 6s linear infinite;
+      -webkit-text-stroke: 2px white;
+      text-stroke: 2px white;
     }
     @keyframes rainbowText {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
 
-    /* 📱 Phone container */
+    /* 📱 Phone wrapper */
     .phone {
       position: relative;
       max-width: 400px;
       margin: 0 auto;
+      z-index: 2;
     }
 
-    /* phone frame image */
     .phone img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    /* 🖼️ Apps inside phone */
+    /* 🔲 Apps grid on screen */
     .apps {
       position: absolute;
-      top: 18%;   /* adjust this to fit into your phone screen area */
+      top: 22.5%; /* moved down about 3/4 of an app */
       left: 50%;
       transform: translateX(-50%);
-      width: 85%; /* how wide apps fit into screen */
+      width: 85%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      padding-top: 40px; /* space for widget */
+      padding-top: 40px;
     }
 
     .app {
@@ -77,7 +72,7 @@
       height: 60px;
       object-fit: cover;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
       transition: transform 0.2s ease;
     }
 
@@ -90,25 +85,36 @@
       font-size: 0.75rem;
     }
 
-    /* 📱 Responsive */
     @media (max-width: 600px) {
-      h1 { font-size: 2.2rem; }
+      h1 { font-size: 2.5rem; }
       .app img { width: 50px; height: 50px; }
       .apps { gap: 14px; }
+    }
+
+    /* 🎇 Floating red dots w/ trails */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
+  <!-- background animation -->
+  <canvas id="bg"></canvas>
 
   <!-- ✨ Title -->
   <h1>Connor's Links</h1>
 
-  <!-- 📱 Phone w/ apps on top -->
+  <!-- 📱 Phone w/ apps -->
   <div class="phone">
     <img src="images/iphoneforwebsite.png" alt="Phone Frame">
 
     <div class="apps">
-      <!-- 👇 Each app icon (replace # with links) -->
+      <!-- 👇 add ur links -->
       <div class="app">
         <a href="#"><img src="images/snapchat.png" alt="Snapchat"></a>
         <span>Snapchat</span>
@@ -136,5 +142,59 @@
     </div>
   </div>
 
+  <script>
+    // 🎇 floating red dots w/ trails
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+    let particles = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = h + Math.random() * h;
+        this.size = 2 + Math.random() * 2;
+        this.speedY = 0.5 + Math.random() * 1.5;
+        this.alpha = 0.5 + Math.random() * 0.5;
+      }
+      update() {
+        this.y -= this.speedY;
+        if (this.y < -10) {
+          this.y = h + 10;
+          this.x = Math.random() * w;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,0,0,${this.alpha})`;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "red";
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    for (let i = 0; i < 80; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
 </body>
 </html>
