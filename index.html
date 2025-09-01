@@ -7,17 +7,17 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden;
-      font-family: 'Trebuchet MS', sans-serif; /* rounded style */
+      font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif; /* roundy style */
       background: #000; /* OLED black */
       color: white;
       text-align: center;
+      overflow-x: hidden; /* only block sideways scroll */
     }
 
-    /* 🌈 Rainbow w/ white stroke */
+    /* 🌈 rainbow text w/ thinner white stroke */
     h1 {
-      font-size: 3.5rem;
-      margin: 20px 0;
+      font-size: 4.5rem;
+      margin: 30px 0;
       background: linear-gradient(
         to right,
         red, orange, yellow, green, cyan, blue, violet, red
@@ -26,19 +26,19 @@
       -webkit-text-fill-color: transparent;
       background-size: 400% 100%;
       animation: rainbowText 6s linear infinite;
-      -webkit-text-stroke: 2px white;
-      text-stroke: 2px white;
+      -webkit-text-stroke: 1px white;
+      text-stroke: 1px white;
     }
     @keyframes rainbowText {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
 
-    /* 📱 Phone wrapper */
+    /* 📱 phone wrapper */
     .phone {
       position: relative;
       max-width: 400px;
-      margin: 0 auto;
+      margin: 0 auto 100px auto;
       z-index: 2;
     }
 
@@ -48,10 +48,10 @@
       display: block;
     }
 
-    /* 🔲 Apps grid on screen */
+    /* 🔲 apps grid */
     .apps {
       position: absolute;
-      top: 22.5%; /* moved down about 3/4 of an app */
+      top: 28%; /* moved further down to clear widget */
       left: 50%;
       transform: translateX(-50%);
       width: 85%;
@@ -86,19 +86,20 @@
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 2.5rem; }
+      h1 { font-size: 3rem; }
       .app img { width: 50px; height: 50px; }
-      .apps { gap: 14px; }
+      .apps { gap: 14px; top: 30%; }
     }
 
-    /* 🎇 Floating red dots w/ trails */
+    /* 🎇 floating red dots behind content */
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: -1; /* 👈 keeps particles under everything */
+      pointer-events: none; /* so u can still click apps */
     }
   </style>
 </head>
@@ -114,7 +115,7 @@
     <img src="images/iphoneforwebsite.png" alt="Phone Frame">
 
     <div class="apps">
-      <!-- 👇 add ur links -->
+      <!-- 👇 fill in links -->
       <div class="app">
         <a href="#"><img src="images/snapchat.png" alt="Snapchat"></a>
         <span>Snapchat</span>
