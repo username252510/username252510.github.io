@@ -21,6 +21,24 @@
     }
     .container{max-width:1100px;width:100%;text-align:center}
     img{max-width:90%;height:auto;border-radius:8px;box-shadow:0 8px 24px rgba(255,255,255,0.03)}
+    
+    /* Styles for the new text section */
+    .text-content{
+      max-width:600px;
+      margin:24px auto;
+      line-height:1.6;
+      font-size:16px;
+      opacity:0.9;
+    }
+    .text-content a{
+      color:#2f9e2f; /* A clean accent color for your guide link */
+      text-decoration:none;
+      font-weight:500;
+    }
+    .text-content a:hover{
+      text-decoration:underline;
+    }
+
     .github-link{
       display:inline-block;
       text-decoration:none;
@@ -37,10 +55,13 @@
 </head>
 <body>
   <main class="container">
-    <!-- Image (relative path) -->
-    <img src="images/67.webp" alt="Main image">
+    <img src="images/KravaGubby.PNG" alt="Main image">
 
-    <!-- Clickable GitHub link -->
+    <div class="text-content">
+      <p>There isnt really anything on the main page of my site rn, but Im going to add stuff eventually :)</p>
+      <p>but I am currently making an iOS sideloading page at <a href="https://con.is-cool.dev/apple/sideloading/" target="_blank" rel="noopener noreferrer">con.is-cool.dev/apple/sideloading</a>.</p>
+    </div>
+
     <p>
       <a class="github-link" href="https://github.com/username252510" target="_blank" rel="noopener noreferrer">Visit my GitHub</a>
     </p>
