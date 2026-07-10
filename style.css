@@ -1,0 +1,201 @@
+/* ==========================================================================
+   THEME VARIABLES (Dark Cyber Theme)
+   ========================================================================== */
+:root {
+  --bg: #07090d;
+  --card: #0c0f15;
+  --text: #dde4f0;
+  --text-muted: #4e6070;
+  --border: #161c27;
+  --nav-bg: rgba(12, 15, 21, 0.8);
+  
+  /* Thick Dark Blue Outline System */
+  --outline-blue: #1d4ed8;
+  --blue-glow: rgba(29, 78, 216, 0.4);
+  --text-blue-accent: #3b82f6;
+}
+
+/* ==========================================================================
+   BASE RESETS
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.25s ease; /* Smooth hover animations */
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Oxanium', sans-serif;
+  min-height: 100vh;
+}
+
+/* Subtle background tech-grid (adjusted to a faint blue) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(29, 78, 216, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 78, 216, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINER
+   ========================================================================== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 2rem 1rem 4rem;
+  margin: auto;
+  text-align: center;
+}
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--outline-blue); /* Thicker dark blue bottom border */
+}
+
+.nav-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  border: 2px solid transparent; /* 2px baseline prevents layout jitter on hover */
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  border: 2px solid var(--outline-blue);
+  box-shadow: 0 0 10px var(--blue-glow);
+}
+
+.nav-link.active {
+  color: var(--text-blue-accent);
+  border: 2px solid var(--outline-blue);
+  box-shadow: 0 0 12px var(--blue-glow);
+}
+
+.nav-right {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  border-color: var(--outline-blue);
+  color: var(--text-blue-accent);
+  box-shadow: 0 0 10px var(--blue-glow);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY & HERO
+   ========================================================================== */
+h1 {
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(140deg, #ffffff 20%, var(--text-blue-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn {
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border: 2px solid var(--outline-blue); /* Thicker outline */
+  color: var(--text-blue-accent);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  box-shadow: 0 0 10px var(--blue-glow);
+  background: transparent;
+}
+
+.btn:hover {
+  background: rgba(29, 78, 216, 0.15);
+  box-shadow: 0 0 20px var(--blue-glow);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CONTENT CONTENT CARDS
+   ========================================================================== */
+.about-box {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 2px solid var(--border); /* Thicker base border */
+  border-radius: 10px;
+  text-align: left;
+}
+
+.about-box:hover {
+  border-color: var(--outline-blue);
+  box-shadow: 0 0 15px var(--blue-glow);
+  transform: translateY(-3px);
+}
+
+.about-box h2 {
+  color: var(--text-blue-accent);
+  margin-bottom: 1rem;
+}
+
+.about-box p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
