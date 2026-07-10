@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Con's Sideloading Hub</title>
 
+  <!-- Google Fonts & Global Stylesheet (Stepping up one level to root) -->
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght=400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* ==========================================================================
+       PAGE-SPECIFIC STRUCTURAL LAYOUT (Non-Global)
+       ========================================================================== */
+    
+    /* Layout Grid for Method Cards */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Target Sideloading Cards to inherit Global Theme Styles */
+    .custom-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .custom-card:hover {
+      border-color: var(--outline-blue);
+      box-shadow: 0 0 15px var(--blue-glow);
+      transform: translateY(-3px);
+    }
+
+    /* Header structure inside the cards */
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-title h3 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .card-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Dynamic Pricing & Tag Badges */
+    .badge {
+      font-family: monospace;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(29, 78, 216, 0.3);
+      background: rgba(29, 78, 216, 0.1);
+      color: var(--text-blue-accent);
+    }
+
+    /* Pro / Con Side-Border Callouts */
+    .pros-cons-container {
+      margin: 1.2rem 0;
+    }
+
+    .pro-group, .con-group {
+      padding-left: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pro-group { border-left: 3px solid #00ffcc; }
+    .con-group { border-left: 3px solid #f59e0b; }
+
+    .group-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .group-text {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Survey/Quiz Container Adjustments */
+    .survey-hero {
+      margin-bottom: 2.5rem;
+    }
+
+    .survey-box {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 1.2rem;
+    }
+
+    .survey-box p {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--text-blue-accent);
+      margin-bottom: 1rem;
+    }
+
+    /* Bottom Info Status Bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-blue-accent);
+      border-radius: 50%;
+    }
+
+    /* Sideloading Hub Custom View Links */
+    .view-link {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      background: rgba(22, 28, 39, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    .view-link:hover {
+      background: var(--border);
+      border-color: var(--outline-blue);
+      color: var(--text-blue-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL NAVBAR -->
+  <div class="navbar">
+    <div class="nav-left">
+      <span class="nav-link active" style="font-weight: 800; color: #ffffff;">Con's Sideloading Hub</span>
+    </div>
+    <div class="nav-right">
+      <a href="../" class="nav-link">Home</a>
+      <a href="https://github.com" target="_blank" class="nav-link">GitHub</a>
+    </div>
+  </div>
+
+  <!-- MAIN MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- QUIZ HERO SECTION -->
+    <section class="about-box survey-hero">
+      <h2>Don't know what method to use?</h2>
+      <p>Take this quick quiz to figure out the best sideloading setup for your device, iOS version, and budget.</p>
+      
+      <div class="survey-box">
+        <p>// Insert your custom HTML/JS Quiz questions here</p>
+        <button onclick="startQuiz()" class="btn" style="margin-top: 0;">Start Sideloading Survey</button>
+      </div>
+    </section>
+
+    <!-- STATUS/FILTER METRICS BAR -->
+    <div class="status-bar">
+      <div>
+        Showing <span style="color: var(--text); font-weight: 600;">6</span> methods & tools
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Last Verified: June 2026</span>
+      </div>
+    </div>
+
+    <!-- CARDS METHOD GRID -->
+    <section class="method-grid">
+
+      <!-- Card 1: AltStore -->
+      <div id="card-altstore" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>AltStore & SideStore</h3>
+              <div class="card-subtitle">Personal Apple ID Signers</div>
+            </div>
+            <span class="badge">Free</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">Totally free and never gets revoked since you're using your own Apple ID credentials.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">Max 3 apps at once and you gotta refresh every 7 days. SideStore lets you refresh on-device via a Wi-Fi VPN wrapper, but AltStore needs a PC connection unless you pay for their Patreon tier.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 2: LiveContainer -->
+      <div id="card-livecontainer" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>LiveContainer</h3>
+              <div class="card-subtitle">In-App App Launcher</div>
+            </div>
+            <span class="badge">Bypass</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">Clutch workaround for the 3-app limit. It runs unlimited IPAs inside one single app slot so you don't even have to install them system-wide.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">No extensions, custom widgets, or push notifications. You have to open everything straight from the LiveContainer menu.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 3: Enterprise Certificates -->
+      <div id="card-enterprise" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>Enterprise Certificates</h3>
+              <div class="card-subtitle">Direct On-Device Installations</div>
+            </div>
+            <span class="badge">Public</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">No PC needed at all and no app limits. You can sign apps right on your phone using tools like Feather.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">Super volatile. Apple always revokes these public certs, meaning your apps will instantly crash out unless you're running a DNS blocker.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 4: Paid Developer Slots -->
+      <div id="card-developer" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>Paid Developer Slots</h3>
+              <div class="card-subtitle">Premium Unrestricted Access</div>
+            </div>
+            <span class="badge">Premium</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">Super stable. Gives you a full year of runtime with zero app limits and won't get randomly cooked by public bans.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">Costs money. You gotta buy a slot either straight from Apple ($99/yr) or through third-party signing services.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 5: Anti-Revoke DNS -->
+      <div id="card-dns" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>Anti-Revoke DNS</h3>
+              <div class="card-subtitle">System-Level Shields</div>
+            </div>
+            <span class="badge">Utility</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">Blocks outbound traffic to Apple's OCSP servers so your sideloaded enterprise apps don't get instantly revoked after a ban.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">Must be loaded as an Encrypted DNS profile configuration in your settings and left on 24/7 or it won't do anything.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 6: Cert Checker Shortcut -->
+      <div id="card-shortcut" class="custom-card">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>Cert Checker Shortcut</h3>
+              <div class="card-subtitle">Made by me</div>
+            </div>
+            <span class="badge">Shortcut</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Features</div>
+              <div class="group-text">Check your cert for revocation status in seconds with one single tap. Super fast automated API verification workflow right on your device.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Setup</div>
+              <div class="group-text">Integrates straight into the native iOS Shortcuts app. No extra configuration required to run it from your home screen.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="view-link">View Details</a>
+      </div>
+
+    </section>
+  </div>
+
+  <script>
+    function startQuiz() {
+      console.log("Sideloading logic evaluation initiated.");
+      alert("This is where your quiz code runs to highlight the cards below!");
+    }
+  </script>
+</body>
+</html>
