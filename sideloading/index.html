@@ -14,15 +14,21 @@
        PAGE-SPECIFIC STRUCTURAL LAYOUT (Non-Global)
        ========================================================================== */
     
-    /* Layout Grid for Method Cards */
+    /* Strict 2-Column Layout Grid for Method Cards */
     .method-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
       gap: 1.5rem;
       margin-top: 2rem;
     }
 
-    /* Target Sideloading Cards to inherit Global Theme Styles */
+    @media (min-width: 640px) {
+      .method-grid {
+        grid-template-columns: repeat(2, 1fr); /* Restricts to exactly 2 columns wide on desktop */
+      }
+    }
+
+    /* Target Sideloading Cards to inherit Global Dynamic Theme Styles */
     .custom-card {
       background: var(--card);
       border: 2px solid var(--border);
@@ -32,12 +38,19 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      
+      /* Butter-Smooth 60fps Hover Overrides */
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  border-color 0.3s ease, 
+                  box-shadow 0.3s ease;
+      will-change: transform, box-shadow;
     }
 
+    /* Reactive hover that adapts to color overrides automatically */
     .custom-card:hover {
-      border-color: var(--outline-blue);
-      box-shadow: 0 0 15px var(--blue-glow);
-      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-4px);
     }
 
     /* Header structure inside the cards */
@@ -49,8 +62,9 @@
     }
 
     .card-title h3 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       margin: 0;
+      font-weight: 800;
     }
 
     .card-subtitle {
@@ -59,15 +73,17 @@
       margin-top: 0.2rem;
     }
 
-    /* Dynamic Pricing & Tag Badges */
+    /* Dynamic Pricing & Tag Badges (Adheres to parent container color theme) */
     .badge {
       font-family: monospace;
       font-size: 0.7rem;
+      font-weight: bold;
       padding: 0.25rem 0.6rem;
       border-radius: 4px;
-      border: 1px solid rgba(29, 78, 216, 0.3);
-      background: rgba(29, 78, 216, 0.1);
-      color: var(--text-blue-accent);
+      border: 1.5px solid var(--accent);
+      background: var(--accent-glow);
+      color: var(--accent-text);
+      transition: all 0.3s ease;
     }
 
     /* Pro / Con Side-Border Callouts */
@@ -95,7 +111,7 @@
     .group-text {
       font-size: 0.85rem;
       color: var(--text);
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     /* Survey/Quiz Container Adjustments */
@@ -107,14 +123,14 @@
       background: rgba(0, 0, 0, 0.25);
       padding: 1.25rem;
       border-radius: 8px;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       margin-top: 1.2rem;
     }
 
     .survey-box p {
       font-family: monospace;
       font-size: 0.8rem;
-      color: var(--text-blue-accent);
+      color: var(--accent-text);
       margin-bottom: 1rem;
     }
 
@@ -123,7 +139,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
       padding-bottom: 0.75rem;
       margin-bottom: 1.5rem;
       font-size: 0.85rem;
@@ -139,7 +155,7 @@
     .status-dot {
       width: 8px;
       height: 8px;
-      background-color: var(--text-blue-accent);
+      background-color: var(--accent-text);
       border-radius: 50%;
     }
 
@@ -149,19 +165,22 @@
       width: 100%;
       text-align: center;
       font-size: 0.8rem;
+      font-weight: 600;
       padding: 0.5rem;
       background: rgba(22, 28, 39, 0.4);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: 5px;
       color: var(--text);
       text-decoration: none;
       margin-top: 1rem;
+      transition: all 0.3s ease;
     }
 
     .view-link:hover {
       background: var(--border);
-      border-color: var(--outline-blue);
-      color: var(--text-blue-accent);
+      border-color: var(--accent);
+      color: var(--accent-text);
+      box-shadow: 0 0 10px var(--accent-glow);
     }
   </style>
 </head>
@@ -182,7 +201,7 @@
   <div class="container">
 
     <!-- QUIZ HERO SECTION -->
-    <section class="about-box survey-hero">
+    <section class="about-box survey-hero accent-blue">
       <h2>Don't know what method to use?</h2>
       <p>Take this quick quiz to figure out the best sideloading setup for your device, iOS version, and budget.</p>
       
@@ -203,11 +222,11 @@
       </div>
     </div>
 
-    <!-- CARDS METHOD GRID -->
+    <!-- CARDS METHOD GRID (Exactly 2 columns wide) -->
     <section class="method-grid">
 
-      <!-- Card 1: AltStore -->
-      <div id="card-altstore" class="custom-card">
+      <!-- Card 1: AltStore (Accent: Blue) -->
+      <div id="card-altstore" class="custom-card accent-blue">
         <div>
           <div class="card-top">
             <div class="card-title">
@@ -231,8 +250,8 @@
         <a href="#" class="view-link">View Details</a>
       </div>
 
-      <!-- Card 2: LiveContainer -->
-      <div id="card-livecontainer" class="custom-card">
+      <!-- Card 2: LiveContainer (Accent: Purple) -->
+      <div id="card-livecontainer" class="custom-card accent-purple">
         <div>
           <div class="card-top">
             <div class="card-title">
@@ -256,8 +275,8 @@
         <a href="#" class="view-link">View Details</a>
       </div>
 
-      <!-- Card 3: Enterprise Certificates -->
-      <div id="card-enterprise" class="custom-card">
+      <!-- Card 3: Enterprise Certificates (Accent: Red) -->
+      <div id="card-enterprise" class="custom-card accent-red">
         <div>
           <div class="card-top">
             <div class="card-title">
@@ -281,8 +300,8 @@
         <a href="#" class="view-link">View Details</a>
       </div>
 
-      <!-- Card 4: Paid Developer Slots -->
-      <div id="card-developer" class="custom-card">
+      <!-- Card 4: Paid Developer Slots (Accent: Green) -->
+      <div id="card-developer" class="custom-card accent-green">
         <div>
           <div class="card-top">
             <div class="card-title">
@@ -306,8 +325,8 @@
         <a href="#" class="view-link">View Details</a>
       </div>
 
-      <!-- Card 5: Anti-Revoke DNS -->
-      <div id="card-dns" class="custom-card">
+      <!-- Card 5: Anti-Revoke DNS (Accent: Turquoise) -->
+      <div id="card-dns" class="custom-card accent-turquoise">
         <div>
           <div class="card-top">
             <div class="card-title">
@@ -331,8 +350,8 @@
         <a href="#" class="view-link">View Details</a>
       </div>
 
-      <!-- Card 6: Cert Checker Shortcut -->
-      <div id="card-shortcut" class="custom-card">
+      <!-- Card 6: Cert Checker Shortcut (Accent: Orange) -->
+      <div id="card-shortcut" class="custom-card accent-orange">
         <div>
           <div class="card-top">
             <div class="card-title">
