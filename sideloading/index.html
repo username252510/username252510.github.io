@@ -120,6 +120,20 @@
       margin-bottom: 2.5rem;
       position: relative;
       overflow: hidden;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+
+      /* Butter-Smooth 60fps Hover Overrides for Hero Quiz */
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  border-color 0.3s ease, 
+                  box-shadow 0.3s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .survey-hero:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-4px);
     }
 
     .survey-box {
@@ -238,6 +252,7 @@
       margin-top: 1.2rem;
       transition: all 0.3s ease;
       cursor: pointer;
+      box-sizing: border-box;
     }
 
     .view-link:hover {
@@ -284,77 +299,6 @@
       transform: scale(1.03) !important;
       z-index: 5;
     }
-
-    /* Beautiful Immersive Modal Drawer */
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(4, 5, 8, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .drawer-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .drawer-content {
-      position: fixed;
-      right: -100%;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      max-width: 500px;
-      background: #090c12;
-      border-left: 2px solid var(--accent);
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-      z-index: 101;
-      padding: 2.5rem 2rem;
-      overflow-y: auto;
-      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .drawer-content.active {
-      right: 0;
-    }
-
-    .drawer-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
-      cursor: pointer;
-      font-family: monospace;
-      transition: color 0.2s ease;
-    }
-
-    .drawer-close:hover {
-      color: #ff3366;
-    }
-
-    .modal-step {
-      background: rgba(22, 28, 39, 0.4);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .modal-step-num {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-text);
-      font-weight: 800;
-      margin-bottom: 0.3rem;
-    }
   </style>
 </head>
 <body>
@@ -370,7 +314,7 @@
     </div>
   </div>
 
-  <!-- MAIN MAIN CONTAINER -->
+  <!-- MAIN CONTAINER -->
   <div class="container">
 
     <!-- QUIZ HERO SECTION -->
@@ -392,7 +336,7 @@
     <!-- STATUS/FILTER METRICS BAR -->
     <div class="status-bar">
       <div>
-        Showing <span style="color: var(--text); font-weight: 600;">6</span> methods & tools
+        Showing <span style="color: var(--text); font-weight: 600;">7</span> methods & tools
       </div>
       <div class="status-indicator">
         <span class="status-dot"></span>
@@ -425,7 +369,7 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('altstore')" class="view-link">View Details</button>
+        <a href="./altstore/" class="view-link">View Details</a>
       </div>
 
       <!-- Card 2: LiveContainer (Accent: Purple) -->
@@ -450,7 +394,7 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('livecontainer')" class="view-link">View Details</button>
+        <a href="./livecontainer/" class="view-link">View Details</a>
       </div>
 
       <!-- Card 3: Enterprise Certificates (Accent: Red) -->
@@ -475,7 +419,7 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('enterprise')" class="view-link">View Details</button>
+        <a href="./enterprise/" class="view-link">View Details</a>
       </div>
 
       <!-- Card 4: Paid Developer Slots (Accent: Green) -->
@@ -500,7 +444,7 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('developer')" class="view-link">View Details</button>
+        <a href="./developer/" class="view-link">View Details</a>
       </div>
 
       <!-- Card 5: Anti-Revoke DNS (Accent: Turquoise) -->
@@ -525,7 +469,7 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('dns')" class="view-link">View Details</button>
+        <a href="./dns/" class="view-link">View Details</a>
       </div>
 
       <!-- Card 6: Cert Checker Shortcut (Accent: Orange) -->
@@ -550,19 +494,35 @@
             </div>
           </div>
         </div>
-        <button onclick="openMethodDrawer('shortcut')" class="view-link">View Details</button>
+        <a href="./shortcut/" class="view-link">View Details</a>
+      </div>
+
+      <!-- Card 7: App Downgrader (Accent: Pink) -->
+      <div id="card-downgrader" class="custom-card accent-pink">
+        <div>
+          <div class="card-top">
+            <div class="card-title">
+              <h3>App Downgrader</h3>
+              <div class="card-subtitle">Jailed App Downgraders</div>
+            </div>
+            <span class="badge">Utility</span>
+          </div>
+
+          <div class="pros-cons-container">
+            <div class="pro-group">
+              <div class="group-label">Pros</div>
+              <div class="group-text">Allows downgrading stock App Store apps directly on non-jailbroken devices using specialized tools like PancakeStore and WaffleStore.</div>
+            </div>
+            <div class="con-group">
+              <div class="group-label">Cons</div>
+              <div class="group-text">Requires you to manually install standalone downgraded IPAs, meaning you still need a baseline operational signer to deploy the utility tools.</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://con.is-cool.dev/sideloading/app-downgrader/" class="view-link">View Details</a>
       </div>
 
     </section>
-  </div>
-
-  <!-- FULL IMMERSIVE DRAWER SYSTEM -->
-  <div class="drawer-overlay" id="detail-drawer-overlay" onclick="closeMethodDrawer()"></div>
-  <div class="drawer-content" id="detail-drawer">
-    <button class="drawer-close" onclick="closeMethodDrawer()">[X]</button>
-    <div id="drawer-dynamic-body">
-      <!-- Injected Dynamically by JS -->
-    </div>
   </div>
 
   <script>
@@ -720,115 +680,6 @@
           element.classList.add('highlight-card-active');
         }, 400);
       }
-    }
-
-    const methodData = {
-      altstore: {
-        title: "AltStore & SideStore",
-        subtitle: "Personal ID Signing Environment",
-        badge: "Free",
-        desc: "AltStore operates by registering a dummy development server on your computer that automatically mimics Xcode's development environment. Every 7 days, your iOS apps require re-verification with Apple's servers.",
-        steps: [
-          "Download AltServer onto your Windows computer or macOS system.",
-          "Plug your iOS device into your PC via a USB cable, enabling Wi-Fi Syncing option.",
-          "Select 'Install AltStore' and input your regular Apple ID credentials to register developer profile.",
-          "Accept development certificate inside iOS Settings > General > VPN & Device Management.",
-          "Keep AltServer running on your local network to ensure silent, wire-free weekly updates."
-        ]
-      },
-      livecontainer: {
-        title: "LiveContainer",
-        subtitle: "Workaround Container App",
-        badge: "Bypass",
-        desc: "LiveContainer works like an emulator layer, except it hosts standard native iOS binaries inside its own system sandbox. This bypasses the typical Apple 3-app provisioning restriction.",
-        steps: [
-          "Install LiveContainer using a standard signer tool of your choice (like AltStore).",
-          "Open the app on your device, download/load the desired `.ipa` binary file directly.",
-          "Run your favorite sideloaded apps directly from the LiveContainer launchpad dashboard.",
-          "Note: App modifications requiring external system extensions or custom push-notifications won't run inside containers."
-        ]
-      },
-      enterprise: {
-        title: "Enterprise Certificates",
-        subtitle: "Direct Signing Systems",
-        badge: "Public",
-        desc: "These certificates are issued by Apple directly to verified businesses to configure custom apps. Sometimes they leak publicly, allowing anyone to register apps for free without computer connection.",
-        steps: [
-          "Locate a verified, active public corporate Enterprise Certificate source link online.",
-          "Tap on install inside direct configuration browser and verify developer identity in Settings.",
-          "Install a trustworthy dynamic on-device signing tool (like Feather) for managing apps.",
-          "Pair this install configuration with an Anti-Revoke DNS profile shield to prevent instantaneous app crashes."
-        ]
-      },
-      developer: {
-        title: "Paid Developer Slots",
-        subtitle: "Premium Signing Environment",
-        badge: "Premium",
-        desc: "Purchased Developer Slots grant you direct access to developer-tier profiles. Because these profiles are verified and registered with corporate credentials, they survive public revokes flawlessly.",
-        steps: [
-          "Buy a dedicated signing registration slot directly through Apple or reliable third-party networks.",
-          "Provide your unique device UDID to the service to associate certificate profile with hardware.",
-          "Install premium signing applications, loading profiles to sign apps 24/7 directly on-device.",
-          "Enjoy 365 days of uninterrupted, un-revoked app operations."
-        ]
-      },
-      dns: {
-        title: "Anti-Revoke DNS profile",
-        subtitle: "System Protection Utility",
-        badge: "Utility",
-        desc: "Blocks system-level connections trying to access cert validation endpoints like 'ocsp.apple.com' that check public certifications status.",
-        steps: [
-          "Download trusted configuration profile containing anti-revoke DNS entries.",
-          "Navigate to Settings > Profile Downloaded, and install system security profile.",
-          "Turn on Shield 24/7. This stops iOS from realizing your enterprise certificates were banned."
-        ]
-      },
-      shortcut: {
-        title: "Cert Checker Shortcut",
-        subtitle: "iOS Automation shortcut",
-        badge: "Shortcut",
-        desc: "A custom automation shortcut created to quickly ping certificate database servers, ensuring your certificates are running soundly.",
-        steps: [
-          "Download the Shortcuts profile to import it into your iOS Shortcuts app.",
-          "Configure home screen access widget for quick monitoring workflows.",
-          "Run checker directly from your home screen. It instantly pings Apple servers, diagnosing status in less than 3 seconds."
-        ]
-      }
-    };
-
-    function openMethodDrawer(key) {
-      const data = methodData[key];
-      if (!data) return;
-
-      const bodyHtml = `
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.3rem;">${data.title}</h2>
-        <p style="font-family: monospace; font-size: 0.8rem; color: var(--accent-text); text-transform: uppercase; margin-bottom: 1.5rem;">
-          CATEGORY: ${data.badge} • ${data.subtitle}
-        </p>
-        
-        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text); margin-bottom: 2rem;">
-          ${data.desc}
-        </p>
-
-        <h4 style="font-size: 1rem; color: #ffffff; margin-bottom: 1rem; font-weight: 600;">Installation & Usage Steps:</h4>
-        <div style="display: flex; flex-direction: column;">
-          ${data.steps.map((step, idx) => `
-            <div class="modal-step">
-              <div class="modal-step-num">Step ${idx + 1}</div>
-              <div style="font-size: 0.85rem; line-height: 1.5; color: var(--text);">${step}</div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-
-      document.getElementById('drawer-dynamic-body').innerHTML = bodyHtml;
-      document.getElementById('detail-drawer-overlay').classList.add('active');
-      document.getElementById('detail-drawer').classList.add('active');
-    }
-
-    function closeMethodDrawer() {
-      document.getElementById('detail-drawer-overlay').classList.remove('active');
-      document.getElementById('detail-drawer').classList.remove('active');
     }
   </script>
 </body>
