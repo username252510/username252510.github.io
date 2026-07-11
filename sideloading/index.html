@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Con's Sideloading Hub</title>
 
-  <!-- Google Fonts & Global Stylesheet (Stepping up one level to root) -->
+  <!-- Google Fonts & Global Stylesheet -->
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght=400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
   <style>
     /* ==========================================================================
-       PAGE-SPECIFIC STRUCTURAL LAYOUT (Non-Global)
+       PAGE-SPECIFIC STRUCTURAL LAYOUT (Non-Global Overrides)
        ========================================================================== */
     
     /* Strict 2-Column Layout Grid for Method Cards */
@@ -42,7 +42,8 @@
       /* Butter-Smooth 60fps Hover Overrides */
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
                   border-color 0.3s ease, 
-                  box-shadow 0.3s ease;
+                  box-shadow 0.3s ease,
+                  filter 0.3s ease;
       will-change: transform, box-shadow;
     }
 
@@ -73,7 +74,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Dynamic Pricing & Tag Badges (Adheres to parent container color theme) */
+    /* Dynamic Pricing & Tag Badges */
     .badge {
       font-family: monospace;
       font-size: 0.7rem;
@@ -117,21 +118,83 @@
     /* Survey/Quiz Container Adjustments */
     .survey-hero {
       margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .survey-box {
-      background: rgba(0, 0, 0, 0.25);
-      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 1.5rem;
       border-radius: 8px;
       border: 2px solid var(--border);
       margin-top: 1.2rem;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: all 0.4s ease;
     }
 
-    .survey-box p {
-      font-family: monospace;
-      font-size: 0.8rem;
-      color: var(--accent-text);
-      margin-bottom: 1rem;
+    /* Quiz Slide Transitions */
+    .quiz-slide {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quiz-slide.fade-out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .quiz-slide.fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .quiz-opt-btn {
+      background: rgba(22, 28, 39, 0.6);
+      border: 2.5px solid var(--border);
+      color: var(--text);
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+    }
+
+    .quiz-opt-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      box-shadow: 0 0 10px var(--accent-glow);
+      transform: translateX(4px);
+    }
+
+    /* Quiz Progress Bar */
+    .quiz-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-text);
+      box-shadow: 0 0 8px var(--accent-text);
+      transition: width 0.3s ease;
     }
 
     /* Bottom Info Status Bar */
@@ -159,21 +222,22 @@
       border-radius: 50%;
     }
 
-    /* Sideloading Hub Custom View Links */
+    /* View Details Action Link */
     .view-link {
       display: block;
       width: 100%;
       text-align: center;
       font-size: 0.8rem;
       font-weight: 600;
-      padding: 0.5rem;
+      padding: 0.65rem;
       background: rgba(22, 28, 39, 0.4);
       border: 2px solid var(--border);
       border-radius: 5px;
       color: var(--text);
       text-decoration: none;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .view-link:hover {
@@ -181,6 +245,115 @@
       border-color: var(--accent);
       color: var(--accent-text);
       box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* Header Navbar Overrides for Desktop Alignment */
+    .navbar {
+      display: flex !important;
+      flex-wrap: nowrap !important; /* Forces items to stay in one single row */
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+
+    .nav-right {
+      display: flex !important;
+      gap: 0.8rem !important;
+      margin-top: 0 !important; /* Prevents shifting home and github buttons downward */
+      align-items: center;
+    }
+
+    /* Cyber pulsing border highlight animation */
+    @keyframes cyber-pulse {
+      0% {
+        box-shadow: 0 0 10px var(--accent-glow);
+        border-color: var(--accent);
+      }
+      50% {
+        box-shadow: 0 0 30px var(--accent-text), inset 0 0 12px var(--accent-glow);
+        border-color: var(--accent-text);
+      }
+      100% {
+        box-shadow: 0 0 10px var(--accent-glow);
+        border-color: var(--accent);
+      }
+    }
+
+    .highlight-card-active {
+      animation: cyber-pulse 1.5s infinite alternate !important;
+      transform: scale(1.03) !important;
+      z-index: 5;
+    }
+
+    /* Beautiful Immersive Modal Drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 5, 8, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .drawer-content {
+      position: fixed;
+      right: -100%;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 500px;
+      background: #090c12;
+      border-left: 2px solid var(--accent);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+      z-index: 101;
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-content.active {
+      right: 0;
+    }
+
+    .drawer-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-family: monospace;
+      transition: color 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      color: #ff3366;
+    }
+
+    .modal-step {
+      background: rgba(22, 28, 39, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-step-num {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-text);
+      font-weight: 800;
+      margin-bottom: 0.3rem;
     }
   </style>
 </head>
@@ -205,9 +378,14 @@
       <h2>Don't know what method to use?</h2>
       <p>Take this quick quiz to figure out the best sideloading setup for your device, iOS version, and budget.</p>
       
-      <div class="survey-box">
-        <p>// Insert your custom HTML/JS Quiz questions here</p>
-        <button onclick="startQuiz()" class="btn" style="margin-top: 0;">Start Sideloading Survey</button>
+      <div class="survey-box" id="quiz-container">
+        <div class="quiz-slide" id="quiz-flow">
+          <!-- Initial Welcome State -->
+          <div style="text-align: center;">
+            <p style="font-size: 1rem; color: var(--text); margin-bottom: 1.5rem;">Find your perfect signing environment in under 1 minute.</p>
+            <button onclick="startSideloadSurvey()" class="btn" style="margin-top: 0; width: auto;">Start Sideloading Survey</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -247,7 +425,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('altstore')" class="view-link">View Details</button>
       </div>
 
       <!-- Card 2: LiveContainer (Accent: Purple) -->
@@ -272,7 +450,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('livecontainer')" class="view-link">View Details</button>
       </div>
 
       <!-- Card 3: Enterprise Certificates (Accent: Red) -->
@@ -297,7 +475,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('enterprise')" class="view-link">View Details</button>
       </div>
 
       <!-- Card 4: Paid Developer Slots (Accent: Green) -->
@@ -322,7 +500,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('developer')" class="view-link">View Details</button>
       </div>
 
       <!-- Card 5: Anti-Revoke DNS (Accent: Turquoise) -->
@@ -347,7 +525,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('dns')" class="view-link">View Details</button>
       </div>
 
       <!-- Card 6: Cert Checker Shortcut (Accent: Orange) -->
@@ -372,16 +550,285 @@
             </div>
           </div>
         </div>
-        <a href="#" class="view-link">View Details</a>
+        <button onclick="openMethodDrawer('shortcut')" class="view-link">View Details</button>
       </div>
 
     </section>
   </div>
 
+  <!-- FULL IMMERSIVE DRAWER SYSTEM -->
+  <div class="drawer-overlay" id="detail-drawer-overlay" onclick="closeMethodDrawer()"></div>
+  <div class="drawer-content" id="detail-drawer">
+    <button class="drawer-close" onclick="closeMethodDrawer()">[X]</button>
+    <div id="drawer-dynamic-body">
+      <!-- Injected Dynamically by JS -->
+    </div>
+  </div>
+
   <script>
-    function startQuiz() {
-      console.log("Sideloading logic evaluation initiated.");
-      alert("This is where your quiz code runs to highlight the cards below!");
+    // Quiz steps and logic
+    const surveySteps = [
+      {
+        question: "What is your budget for sideloading apps?",
+        options: [
+          { text: "Free ($0) - I don't mind periodic app refreshes", value: "free" },
+          { text: "Paid ($10-$20/yr) - I want direct stability with zero limits", value: "premium" }
+        ]
+      },
+      {
+        question: "Do you have regular access to a computer (Mac or PC)?",
+        options: [
+          { text: "Yes, I have a computer available", value: "pc" },
+          { text: "No, I am mobile-only", value: "no_pc" }
+        ]
+      },
+      {
+        question: "Are you running an exploitable iOS version (iOS 14 - 16.6.1)?",
+        options: [
+          { text: "Yes, older iOS firmware", value: "exploit" },
+          { text: "No, on standard newer iOS (17 - 18+)", value: "new_ios" }
+        ]
+      }
+    ];
+
+    let currentStep = 0;
+    let userAnswers = {};
+
+    function startSideloadSurvey() {
+      currentStep = 0;
+      userAnswers = {};
+      renderSurveyStep();
+    }
+
+    function transitionQuizSlide(newHtml) {
+      const container = document.getElementById('quiz-flow');
+      container.classList.add('fade-out');
+      
+      setTimeout(() => {
+        container.innerHTML = newHtml;
+        container.classList.remove('fade-out');
+        container.classList.add('fade-in');
+        
+        setTimeout(() => {
+          container.classList.remove('fade-in');
+        }, 50);
+      }, 300);
+    }
+
+    function renderSurveyStep() {
+      const stepData = surveySteps[currentStep];
+      const progressPercent = Math.round((currentStep / surveySteps.length) * 100);
+
+      let optionsHtml = '';
+      stepData.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button class="quiz-opt-btn" onclick="selectSurveyOption('${opt.value}')">
+            ${opt.text}
+          </button>
+        `;
+      });
+
+      const stepHtml = `
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" style="width: ${progressPercent}%"></div>
+        </div>
+        <p style="font-family: monospace; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; text-align: left;">
+          STEP ${currentStep + 1} OF ${surveySteps.length}
+        </p>
+        <h3 style="font-size: 1.1rem; text-align: left; margin-bottom: 1rem; line-height: 1.4;">${stepData.question}</h3>
+        <div class="quiz-options">
+          ${optionsHtml}
+        </div>
+      `;
+
+      transitionQuizSlide(stepHtml);
+    }
+
+    function selectSurveyOption(val) {
+      userAnswers[currentStep] = val;
+      currentStep++;
+
+      if (currentStep < surveySteps.length) {
+        renderSurveyStep();
+      } else {
+        calculateBestSideloadingMethod();
+      }
+    }
+
+    function calculateBestSideloadingMethod() {
+      const budget = userAnswers[0];
+      const hasPc = userAnswers[1];
+      const isExploitable = userAnswers[2];
+
+      let recommendedId = '';
+      let recommendedName = '';
+      let matchReason = '';
+
+      if (budget === 'premium') {
+        recommendedId = 'card-developer';
+        recommendedName = 'Paid Developer Slots';
+        matchReason = "Since you are willing to spend slightly on a custom slot, Paid Developer Slots offer a perfect match. You get a full year of hassle-free runtime, zero developer limit, and complete independence from revokes.";
+      } else if (hasPc === 'pc') {
+        if (isExploitable === 'exploit') {
+          recommendedId = 'card-livecontainer';
+          recommendedName = 'LiveContainer';
+          matchReason = "Because you have access to a PC and an older, exploitable iOS version, LiveContainer is your best companion. It allows running unlimited IPAs inside a single on-device container safely.";
+        } else {
+          recommendedId = 'card-altstore';
+          recommendedName = 'AltStore & SideStore';
+          matchReason = "Since you want a free solution and have access to a PC, AltStore / SideStore is the gold standard. They compile the code cleanly utilizing your own developer signature, meaning zero public ban potential.";
+        }
+      } else {
+        // No PC, Free Budget
+        recommendedId = 'card-enterprise';
+        recommendedName = 'Enterprise Certificates';
+        matchReason = "Because you are mobile-only and looking for a free solution, Public Enterprise Certificates represent your match. *Note: Ensure you configure the Anti-Revoke DNS profile to protect your setup!*";
+      }
+
+      // Display quiz result
+      const resultHtml = `
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" style="width: 100%; background-color: #00ffcc; box-shadow: 0 0 10px #00ffcc;"></div>
+        </div>
+        <h3 style="font-size: 1.25rem; color: #00ffcc; margin-bottom: 0.5rem; text-align: left;">🎉 Match Found: ${recommendedName}!</h3>
+        <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text); text-align: left; margin-bottom: 1.2rem;">
+          ${matchReason}
+        </p>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-start; flex-wrap: wrap;">
+          <button onclick="scrollAndHighlightMethod('${recommendedId}')" class="btn" style="margin-top: 0; padding: 0.5rem 1rem; font-size: 0.8rem;">
+            Highlight Match
+          </button>
+          <button onclick="startSideloadSurvey()" class="btn" style="margin-top: 0; padding: 0.5rem 1rem; font-size: 0.8rem; background: transparent; border-color: var(--border); color: var(--text-muted);">
+            Restart Quiz
+          </button>
+        </div>
+      `;
+
+      transitionQuizSlide(resultHtml);
+    }
+
+    function scrollAndHighlightMethod(id) {
+      // Clear existing highlight classes
+      document.querySelectorAll('.custom-card').forEach(el => {
+        el.classList.remove('highlight-card-active');
+      });
+
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          element.classList.add('highlight-card-active');
+        }, 400);
+      }
+    }
+
+    const methodData = {
+      altstore: {
+        title: "AltStore & SideStore",
+        subtitle: "Personal ID Signing Environment",
+        badge: "Free",
+        desc: "AltStore operates by registering a dummy development server on your computer that automatically mimics Xcode's development environment. Every 7 days, your iOS apps require re-verification with Apple's servers.",
+        steps: [
+          "Download AltServer onto your Windows computer or macOS system.",
+          "Plug your iOS device into your PC via a USB cable, enabling Wi-Fi Syncing option.",
+          "Select 'Install AltStore' and input your regular Apple ID credentials to register developer profile.",
+          "Accept development certificate inside iOS Settings > General > VPN & Device Management.",
+          "Keep AltServer running on your local network to ensure silent, wire-free weekly updates."
+        ]
+      },
+      livecontainer: {
+        title: "LiveContainer",
+        subtitle: "Workaround Container App",
+        badge: "Bypass",
+        desc: "LiveContainer works like an emulator layer, except it hosts standard native iOS binaries inside its own system sandbox. This bypasses the typical Apple 3-app provisioning restriction.",
+        steps: [
+          "Install LiveContainer using a standard signer tool of your choice (like AltStore).",
+          "Open the app on your device, download/load the desired `.ipa` binary file directly.",
+          "Run your favorite sideloaded apps directly from the LiveContainer launchpad dashboard.",
+          "Note: App modifications requiring external system extensions or custom push-notifications won't run inside containers."
+        ]
+      },
+      enterprise: {
+        title: "Enterprise Certificates",
+        subtitle: "Direct Signing Systems",
+        badge: "Public",
+        desc: "These certificates are issued by Apple directly to verified businesses to configure custom apps. Sometimes they leak publicly, allowing anyone to register apps for free without computer connection.",
+        steps: [
+          "Locate a verified, active public corporate Enterprise Certificate source link online.",
+          "Tap on install inside direct configuration browser and verify developer identity in Settings.",
+          "Install a trustworthy dynamic on-device signing tool (like Feather) for managing apps.",
+          "Pair this install configuration with an Anti-Revoke DNS profile shield to prevent instantaneous app crashes."
+        ]
+      },
+      developer: {
+        title: "Paid Developer Slots",
+        subtitle: "Premium Signing Environment",
+        badge: "Premium",
+        desc: "Purchased Developer Slots grant you direct access to developer-tier profiles. Because these profiles are verified and registered with corporate credentials, they survive public revokes flawlessly.",
+        steps: [
+          "Buy a dedicated signing registration slot directly through Apple or reliable third-party networks.",
+          "Provide your unique device UDID to the service to associate certificate profile with hardware.",
+          "Install premium signing applications, loading profiles to sign apps 24/7 directly on-device.",
+          "Enjoy 365 days of uninterrupted, un-revoked app operations."
+        ]
+      },
+      dns: {
+        title: "Anti-Revoke DNS profile",
+        subtitle: "System Protection Utility",
+        badge: "Utility",
+        desc: "Blocks system-level connections trying to access cert validation endpoints like 'ocsp.apple.com' that check public certifications status.",
+        steps: [
+          "Download trusted configuration profile containing anti-revoke DNS entries.",
+          "Navigate to Settings > Profile Downloaded, and install system security profile.",
+          "Turn on Shield 24/7. This stops iOS from realizing your enterprise certificates were banned."
+        ]
+      },
+      shortcut: {
+        title: "Cert Checker Shortcut",
+        subtitle: "iOS Automation shortcut",
+        badge: "Shortcut",
+        desc: "A custom automation shortcut created to quickly ping certificate database servers, ensuring your certificates are running soundly.",
+        steps: [
+          "Download the Shortcuts profile to import it into your iOS Shortcuts app.",
+          "Configure home screen access widget for quick monitoring workflows.",
+          "Run checker directly from your home screen. It instantly pings Apple servers, diagnosing status in less than 3 seconds."
+        ]
+      }
+    };
+
+    function openMethodDrawer(key) {
+      const data = methodData[key];
+      if (!data) return;
+
+      const bodyHtml = `
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.3rem;">${data.title}</h2>
+        <p style="font-family: monospace; font-size: 0.8rem; color: var(--accent-text); text-transform: uppercase; margin-bottom: 1.5rem;">
+          CATEGORY: ${data.badge} • ${data.subtitle}
+        </p>
+        
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text); margin-bottom: 2rem;">
+          ${data.desc}
+        </p>
+
+        <h4 style="font-size: 1rem; color: #ffffff; margin-bottom: 1rem; font-weight: 600;">Installation & Usage Steps:</h4>
+        <div style="display: flex; flex-direction: column;">
+          ${data.steps.map((step, idx) => `
+            <div class="modal-step">
+              <div class="modal-step-num">Step ${idx + 1}</div>
+              <div style="font-size: 0.85rem; line-height: 1.5; color: var(--text);">${step}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      document.getElementById('drawer-dynamic-body').innerHTML = bodyHtml;
+      document.getElementById('detail-drawer-overlay').classList.add('active');
+      document.getElementById('detail-drawer').classList.add('active');
+    }
+
+    function closeMethodDrawer() {
+      document.getElementById('detail-drawer-overlay').classList.remove('active');
+      document.getElementById('detail-drawer').classList.remove('active');
     }
   </script>
 </body>
