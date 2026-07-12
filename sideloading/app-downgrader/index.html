@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Downgraders - Con's Sideloading Hub</title>
 
+  <!-- Google Fonts & Global Stylesheet Referencing -->
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght=400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* ==========================================================================
+       PAGE-SPECIFIC STRUCTURAL LAYOUT
+       ========================================================================== */
+    
+    /* Layout definition for the two comparison columns */
+    .downgrader-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .downgrader-grid {
+        grid-template-columns: repeat(2, 1fr); /* Pristine 50/50 split on desktop */
+      }
+    }
+
+    /* Core Card Structure matching your design specifications */
+    .store-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 24px; /* Matches the organic curve of modern UI design blocks */
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      
+      /* Smooth high-refresh-rate hover handling */
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  border-color 0.3s ease, 
+                  box-shadow 0.3s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .store-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--accent-glow);
+      transform: translateY(-5px);
+    }
+
+    /* Precise iOS Squircle Masking to eliminate unwanted outer image borders */
+    .app-logo-wrapper {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.5rem;
+      overflow: hidden;
+      border-radius: 22.5%; /* Exact proportional radius replicating iOS app clipping */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Card Content Styling */
+    .store-card h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .store-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Precise alignment matching your draft lists */
+    .features-list {
+      text-align: left;
+      width: 100%;
+      padding-left: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .features-list li {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Split-action row alignment for tool installation buttons */
+    .card-actions {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .card-actions .btn {
+      flex: 1;
+      margin-top: 0;
+      padding: 0.8rem 0.5rem;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* Strict execution of global desktop header navigation styling */
+    .navbar {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+
+    .nav-right {
+      display: flex !important;
+      gap: 0.8rem !important;
+      margin-top: 0 !important;
+      align-items: center;
+    }
+
+    /* Warning Block Emphasis Text Styling */
+    .warning-text {
+      color: var(--accent-text);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL NAVBAR (Enforced Blue Sideloading Theme context) -->
+  <div class="navbar accent-blue">
+    <div class="nav-left">
+      <span class="nav-link active" style="font-weight: 800; color: #ffffff;">Con's Sideloading Hub</span>
+    </div>
+    <div class="nav-right">
+      <a href="../" class="nav-link">Home</a>
+      <a href="https://github.com" target="_blank" class="nav-link">GitHub</a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- OVERVIEW & DOCUMENTATION HERO BOX -->
+    <section class="about-box accent-orange">
+      <h2>App Downgraders</h2>
+      <p>
+        PancakeStore and WaffleStore are exploitless, jailed App Store app downgraders. Because they operate within native sandbox user privileges, they require an active baseline sideloading setup to deploy their respective tool installation utility packages (IPAs) onto your device.
+      </p>
+      <p>
+        To interface with Apple services, they require you to authenticate using the same active Apple ID configured on the host target hardware. <span class="warning-text">⚠️ Warning: These systems can occasionally experience functional breakages when Apple deploys sudden structural changes to their server-side mechanics.</span>
+      </p>
+      <p>
+        Once a target app version has been successfully handled, the resulting downgraded apps <strong>do not require any sideloading platform signatures</strong>. They install seamlessly as native systems directly through Apple's production infrastructure, pulled straight from official, archived App Store servers. This ensures they are signed completely with Apple's official App Store distribution certificate and wrapped in custom FairPlay DRM tied explicitly to your personal Apple ID accounts.
+      </p>
+    </section>
+
+    <!-- UTILITY OVERVIEW COMPARISON GRID -->
+    <main class="downgrader-grid">
+
+      <!-- TOOL ONE: PANCAKESTORE -->
+      <article class="store-card accent-orange">
+        <div style="width: 100%;">
+          <div class="app-logo-wrapper">
+            <img src="images/Pancakestorelogo.jpg" alt="PancakeStore App Logo" class="app-logo">
+          </div>
+          
+          <h2>PancakeStore</h2>
+          <p>The well known, community favorite for downgrading App Store apps. It is by a reputable dev and gets quick updates whenever Apple updates their servers.</p>
+          
+          <ul class="features-list">
+            <li>Well established and by a reputable developer, and is quickly updated to patch server sided changes by Apple</li>
+            <li>Share apps directly from the App Store to the app through the share sheet</li>
+            <li>Lets you export the downgrade .ipa file (encrypted with FairPlay DRM)</li>
+            <li>Automatically clears cached files so that it doesn't take up too much storage</li>
+          </ul>
+        </div>
+
+        <div class="card-actions">
+          <a href="https://github.com/jailbreakdotparty/PancakeStore" target="_blank" class="btn">View GitHub</a>
+          <a href="https://github.com/jailbreakdotparty/PancakeStore/releases/latest" class="btn">Download IPA</a>
+        </div>
+      </article>
+
+      <!-- TOOL TWO: WAFFLESTORE -->
+      <article class="store-card accent-orange">
+        <div style="width: 100%;">
+          <div class="app-logo-wrapper">
+            <img src="images/Wafflestorelogo.jpg" alt="WaffleStore App Logo" class="app-logo">
+          </div>
+          
+          <h2>WaffleStore</h2>
+          <p>A newer, less established fork of PancakeStore. It is very similar under the hood but adds more quality of life features.</p>
+          
+          <ul class="features-list">
+            <li>Newer and less well known utility</li>
+            <li>Favorite apps that you frequently downgrade for easy access</li>
+            <li>Search App Store apps and automatically fetch the link directly in the app</li>
+            <li>Progress bar to track how far you are during the process of a downgrade</li>
+            <li>History of downgraded apps that can be exported and imported as a JSON</li>
+          </ul>
+        </div>
+
+        <div class="card-actions">
+          <a href="https://github.com/nxtcoreee3/WaffleStore" target="_blank" class="btn">View GitHub</a>
+          <a href="https://github.com/nxtcoreee3/WaffleStore/releases/latest" class="btn">Download IPA</a>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+</body>
+</html>
