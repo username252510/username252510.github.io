@@ -1,249 +1,257 @@
 /* ==========================================================================
-THEME VARIABLES & COLOR UTILITIES (Dark Cyber Theme)
-========================================================================== /
-/ STREAMING_CHUNK: Defining base theme variables and defaults... */
+   THEME VARIABLES & COLOR UTILITIES (Dark Cyber Theme)
+   ========================================================================== */
 :root {
---bg: #07090d;
---card: #0c0f15;
---text: #dde4f0;
---text-muted: #4e6070;
---border: #161c27;
---nav-bg: rgba(12, 15, 21, 0.8);
+  --bg: #07090d;
+  --card: #0c0f15;
+  --text: #dde4f0;
+  --text-muted: #4e6070;
+  --border: #161c27;
+  --nav-bg: rgba(12, 15, 21, 0.8);
 
-/* Fallback/Default Theme (Vivid Blue) */
---accent: #1d4ed8;
---accent-glow: rgba(29, 78, 216, 0.35);
---accent-text: #3b82f6;
+  /* Fallback/Default Theme (Vivid Blue) */
+  --accent: #1d4ed8;
+  --accent-glow: rgba(29, 78, 216, 0.35);
+  --accent-text: #3b82f6;
 }
 
-/* STREAMING_CHUNK: Creating scoped accent override classes... /
-/ Scoped overrides that automatically tint cards, buttons, or badges */
+/* Scoped overrides that automatically tint cards, buttons, or badges */
 .accent-blue {
---accent: #1d4ed8;
---accent-glow: rgba(29, 78, 216, 0.35);
---accent-text: #3b82f6;
+  --accent: #1d4ed8;
+  --accent-glow: rgba(29, 78, 216, 0.35);
+  --accent-text: #3b82f6;
 }
 
 .accent-red {
---accent: #b91c1c;
---accent-glow: rgba(185, 28, 28, 0.35);
---accent-text: #f87171;
+  --accent: #b91c1c;
+  --accent-glow: rgba(185, 28, 28, 0.35);
+  --accent-text: #f87171;
 }
 
 .accent-orange {
---accent: #c2410c;
---accent-glow: rgba(194, 65, 12, 0.35);
---accent-text: #fb923c;
+  --accent: #c2410c;
+  --accent-glow: rgba(194, 65, 12, 0.35);
+  --accent-text: #fb923c;
 }
 
 .accent-yellow {
---accent: #a16207;
---accent-glow: rgba(161, 98, 7, 0.35);
---accent-text: #facc15;
+  --accent: #a16207;
+  --accent-glow: rgba(161, 98, 7, 0.35);
+  --accent-text: #facc15;
 }
 
 .accent-green {
---accent: #047857;
---accent-glow: rgba(4, 120, 87, 0.35);
---accent-text: #4ade80;
+  --accent: #047857;
+  --accent-glow: rgba(4, 120, 87, 0.35);
+  --accent-text: #4ade80;
 }
 
 .accent-turquoise {
---accent: #0f766e;
---accent-glow: rgba(15, 118, 110, 0.35);
---accent-text: #2dd4bf;
+  --accent: #0f766e;
+  --accent-glow: rgba(15, 118, 110, 0.35);
+  --accent-text: #2dd4bf;
 }
 
 .accent-purple {
---accent: #6d28d9;
---accent-glow: rgba(109, 40, 217, 0.35);
---accent-text: #a78bfa;
+  --accent: #6d28d9;
+  --accent-glow: rgba(109, 40, 217, 0.35);
+  --accent-text: #a78bfa;
 }
 
 .accent-pink {
---accent: #be185d;
---accent-glow: rgba(190, 24, 93, 0.35);
---accent-text: #f472b6;
+  --accent: #be185d;
+  --accent-glow: rgba(190, 24, 93, 0.35);
+  --accent-text: #f472b6;
 }
 
 .accent-white {
---accent: #e2e8f0;
---accent-glow: rgba(226, 232, 240, 0.15);
---accent-text: #ffffff;
+  --accent: #e2e8f0;
+  --accent-glow: rgba(226, 232, 240, 0.15);
+  --accent-text: #ffffff;
 }
 
 /* ==========================================================================
-BASE RESETS
-========================================================================== /
-/ STREAMING_CHUNK: Styling core base resets... */
-
-{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-transition: all 0.25s ease;
+   BASE RESETS
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
 }
 
 html, body {
-overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 body {
-background: var(--bg);
-color: var(--text);
-font-family: 'Oxanium', sans-serif;
-min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Oxanium', sans-serif;
+  min-height: 100vh;
 }
 
 /* Subtle technological background grid */
 body::before {
-content: '';
-position: fixed;
-inset: 0;
-background-image:
-linear-gradient(rgba(29, 78, 216, 0.02) 1px, transparent 1px),
-linear-gradient(90deg, rgba(29, 78, 216, 0.02) 1px, transparent 1px);
-background-size: 50px 50px;
-z-index: 0;
-pointer-events: none;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(29, 78, 216, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 78, 216, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* ==========================================================================
-LAYOUT CONTAINER
-========================================================================== */
+   LAYOUT CONTAINER
+   ========================================================================== */
 .container {
-position: relative;
-z-index: 1;
-max-width: 900px;
-padding: 2rem 1rem 4rem;
-margin: auto;
-text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 2rem 1rem 4rem;
+  margin: auto;
+  text-align: center;
 }
 
 /* ==========================================================================
-NAVBAR
-========================================================================== /
-/ STREAMING_CHUNK: Building responsive header navbar... /
+   NAVBAR
+   ========================================================================== */
 .navbar {
-position: sticky;
-top: 0;
-z-index: 10;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items: center;
-padding: 0.8rem 1rem;
-background: var(--nav-bg);
-backdrop-filter: blur(10px);
-border-bottom: 2px solid var(--accent); / Adapts dynamically */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--accent); /* Adapts dynamically */
 }
 
 .nav-left {
-display: flex;
-flex-wrap: wrap;
-gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .nav-link {
-text-decoration: none;
-color: var(--text-muted);
-font-size: 0.75rem;
-letter-spacing: 0.1em;
-padding: 0.3rem 0.6rem;
-border-radius: 5px;
-border: 2px solid transparent;
-white-space: nowrap;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-color: var(--text);
-border: 2px solid var(--accent);
-box-shadow: 0 0 10px var(--accent-glow);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .nav-link.active {
-color: var(--accent-text);
-border: 2px solid var(--accent);
-box-shadow: 0 0 12px var(--accent-glow);
+  color: var(--accent-text);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .nav-right {
-display: flex;
-gap: 0.4rem;
-margin-top: 0.3rem;
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
 }
 
 /* ==========================================================================
-TYPOGRAPHY & HERO TITLE
-========================================================================== */
+   TYPOGRAPHY & HERO TITLE
+   ========================================================================== */
 h1 {
-font-size: clamp(2.5rem, 10vw, 5rem);
-font-weight: 800;
-letter-spacing: 0.05em;
-text-transform: uppercase;
-background: linear-gradient(140deg, #ffffff 20%, var(--accent-text) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(140deg, #ffffff 20%, var(--accent-text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .tagline {
-margin-top: 1rem;
-font-size: 1rem;
-color: var(--text-muted);
-padding: 0 0.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
 }
 
 /* ==========================================================================
-BUTTONS
-========================================================================== /
-/ STREAMING_CHUNK: Styling reactive modular buttons... */
+   BUTTONS
+   ========================================================================== */
 .btn {
-margin-top: 2rem;
-display: inline-block;
-padding: 0.7rem 1.6rem;
-border: 2px solid var(--accent);
-color: var(--accent-text);
-text-decoration: none;
-border-radius: 6px;
-font-size: 0.85rem;
-box-shadow: 0 0 10px var(--accent-glow);
-background: transparent;
-font-weight: 600;
-cursor: pointer;
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border: 2px solid var(--accent);
+  color: var(--accent-text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  box-shadow: 0 0 10px var(--accent-glow);
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              background-color 0.3s ease, 
+              box-shadow 0.3s ease;
 }
 
 .btn:hover {
-background: var(--accent-glow);
-box-shadow: 0 0 20px var(--accent-glow);
-transform: translateY(-2px);
+  background: var(--accent-glow);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================================
-CONTENT CONTENT CARDS
-========================================================================== /
-/ STREAMING_CHUNK: Styling custom components and boxes... */
-.about-box {
-margin-top: 3rem;
-padding: 1.5rem;
-background: var(--card);
-border: 2px solid var(--border);
-border-radius: 10px;
-text-align: left;
+   CONTENT CARDS & CONTAINERS (Global Dynamic Animation Architecture)
+   ========================================================================== */
+.about-box, .custom-card, .store-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  text-align: left;
+  
+  /* High-performance hardware acceleration preparation */
+  will-change: transform, box-shadow, border-color;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
 }
 
-.about-box:hover {
-border-color: var(--accent);
-box-shadow: 0 0 15px var(--accent-glow);
-transform: translateY(-3px);
+/* Individual component base structural details */
+.about-box {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-radius: 10px;
 }
 
 .about-box h2 {
-color: var(--accent-text);
-margin-bottom: 1rem;
+  color: var(--accent-text);
+  margin-bottom: 1rem;
 }
 
 .about-box p {
-color: var(--text-muted);
-margin-bottom: 1rem;
-line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Automated Hover State Integration mapping variables instantly */
+.about-box:hover, .custom-card:hover, .store-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-4px);
 }
