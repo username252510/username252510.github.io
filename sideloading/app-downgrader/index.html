@@ -30,8 +30,6 @@
 
     /* Core Card Structure matching your design specifications */
     .store-card {
-      background: var(--card);
-      border: 2px solid var(--border);
       border-radius: 24px; /* Matches the organic curve of modern UI design blocks */
       padding: 2.5rem 2rem;
       text-align: center;
@@ -39,18 +37,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      
-      /* Smooth high-refresh-rate hover handling */
-      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                  border-color 0.3s ease, 
-                  box-shadow 0.3s ease;
-      will-change: transform, box-shadow;
-    }
-
-    .store-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 25px var(--accent-glow);
-      transform: translateY(-5px);
+      /* Background, border, and hover animations are now handled globally by style.css */
     }
 
     /* Precise iOS Squircle Masking to eliminate unwanted outer image borders */
@@ -198,7 +185,7 @@
 
         <div class="card-actions">
           <a href="https://github.com/jailbreakdotparty/PancakeStore" target="_blank" class="btn">View GitHub</a>
-          <a href="https://github.com/jailbreakdotparty/PancakeStore/releases/latest" class="btn">Download IPA</a>
+          <a href="https://github.com/jailbreakdotparty/PancakeStore/releases/latest" target="_blank" class="btn">Download IPA</a>
         </div>
       </article>
 
@@ -223,7 +210,7 @@
 
         <div class="card-actions">
           <a href="https://github.com/nxtcoreee3/WaffleStore" target="_blank" class="btn">View GitHub</a>
-          <a href="https://github.com/nxtcoreee3/WaffleStore/releases/latest" class="btn">Download IPA</a>
+          <a href="https://github.com/nxtcoreee3/WaffleStore/releases/latest" target="_blank" class="btn">Download IPA</a>
         </div>
       </article>
 
